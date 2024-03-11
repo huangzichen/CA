@@ -54,4 +54,12 @@ void vector_free(Vector *vector) {
     free(vector);
 }
 
+void another_vector_free(Vector **vector) {
+    if (vector == NULL || *vector == NULL) {
+        return;
+    }
+    free((*vector)->data);
+    free(*vector);
+    *vector = NULL;
+}
 
