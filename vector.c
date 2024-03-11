@@ -45,8 +45,13 @@ double vector_get(const Vector *vector, int index) {
         printf("Invalid index\n");
         return 0.0;
     }
+    if (vector->data[index] == 0.0) {
+        printf("Uninitialized element at index %d\n", index);
+        return 0.0; //
+    }
     return vector->data[index];
 }
+
 
 void vector_free(Vector *vector) {
     if (vector == NULL) {
