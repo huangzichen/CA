@@ -16,8 +16,11 @@ Vector *vector_create(void) {
     return vector;
 }
 
-
 void vector_push(Vector *vector, double element) {
+    if (vector == NULL) {
+        return;
+    }
+
     if (vector->size == vector->capacity) {
         vector->capacity *= 2;
         double *new_data = realloc(vector->data, sizeof(double) * vector->capacity);
@@ -30,11 +33,21 @@ void vector_push(Vector *vector, double element) {
 }
 
 double vector_get(const Vector *vector, int index) {
-  return vector->data[index];
+    if (vector == NULL) {
+        return 0.0;
+    }
+    if (index < 0 || index >= vector->size) {
+        return 0.0;
+    }
+    return vector->data[index];
 }
 
 void vector_free(Vector *vector) {
-  free(vector->data);
-  free(vector);
+    if (vector == NULL) {
+        return;
+    }
+    free(vector->data);
+    free(vector);
 }
+
 
