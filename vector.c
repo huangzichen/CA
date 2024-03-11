@@ -39,8 +39,12 @@ double vector_get(const Vector *vector, int index) {
     if (index < 0 || index >= vector->size) {
         return 0.0;
     }
+    if (vector->data[index] == 0.0) {
+        return 0.0;
+    }
     return vector->data[index];
 }
+
 
 void vector_free(Vector *vector) {
     if (vector == NULL) {
