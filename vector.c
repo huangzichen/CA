@@ -19,6 +19,11 @@ Vector *vector_create(void) {
 }
 
 void vector_push(Vector *vector, double element) {
+    if (vector == NULL) {
+        printf("Invalid vector pointer\n");
+        return;
+    }
+
     if (vector->size == vector->capacity) {
         vector->capacity *= 2;
         double *new_data = realloc(vector->data, sizeof(double) * vector->capacity);
@@ -32,10 +37,23 @@ void vector_push(Vector *vector, double element) {
 }
 
 double vector_get(const Vector *vector, int index) {
-  return vector->data[index];
+    if (vector == NULL) {
+        printf("Invalid vector pointer\n");
+        return 0.0;
+    }
+    if (index < 0 || index >= vector->size) {
+        printf("Invalid index\n");
+        return 0.0;
+    }
+    return vector->data[index];
 }
 
 void vector_free(Vector *vector) {
-  free(vector->data);
-  free(vector);
+    if (vector == NULL) {
+        printf("Invalid vector pointer\n");
+        return;
+    }
+    free(vector->data);
+    free(vector);
 }
+
